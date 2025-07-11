@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1 align="center">Welcome to KK FUNDA - 5th BATCH ON 25th JUNE</h1>
-<h1 align="center"> KK FUNDA with AWS and SRE New batch</h1>
+<h1 align="center"> DEVOPS with AWS and SRE New batch</h1>
 <hr>
 <br>
 	<h1><h3> Server Side IP Address </h3><br>
