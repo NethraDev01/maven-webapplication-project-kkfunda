@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to KK FUNDA by Prashant</h1>
+<h1 align="center">Welcome to KK FUNDA BY PRASHANTH</h1>
 <h1 align="center"> DEVOPS with AWS and SRE New batch</h1>
 <hr>
 <br>
