@@ -18,10 +18,17 @@
         }
 
         .header, .footer {
-            background-color: #003366;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
+    background-color: #003366;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.header h1,
+.header h2 {
+    color: #ffffff;
+}
+
         }
 
         .container {
