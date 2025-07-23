@@ -82,7 +82,7 @@
 
     <!-- 🔷 Top Section with background -->
     <div class="header">
-        <h1>Welcome to AWS DevOps with SRE in TELUGU</h1>
+        <h1>Welcome to AWS DevOps with SRE in TELUGU & ENGLISH</h1>
         <h2>KK FUNDA</h2>
     </div>
 
