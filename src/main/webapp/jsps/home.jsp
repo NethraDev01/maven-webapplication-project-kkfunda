@@ -16,6 +16,14 @@
             background-color: #f4f8fb;
             color: #333;
         }
+
+        .header, .footer {
+            background-color: #003366;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
         .container {
             width: 80%;
             margin: auto;
@@ -23,37 +31,40 @@
             padding: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            margin-top: 40px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
+
         h1, h2, h3 {
             color: #003366;
             text-align: center;
         }
+
         p {
             font-size: 16px;
         }
+
         hr {
             border: 0;
             border-top: 2px solid #ccc;
             margin: 20px 0;
         }
+
         a {
-            color: #007BFF;
+            color: #00c3ff;
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-        }
+
         .logo {
             display: block;
             margin: 20px auto;
             width: 100px;
         }
+
         .contact {
             text-align: center;
             font-weight: bold;
@@ -62,10 +73,14 @@
 </head>
 <body>
 
-    <div class="container">
+    <!-- 🔷 Top Section with background -->
+    <div class="header">
         <h1>Welcome to AWS DevOps with SRE in TELUGU</h1>
         <h2>KK FUNDA</h2>
-        <hr>
+    </div>
+
+    <!-- 🔲 Main Content Area -->
+    <div class="container">
 
         <h3>Server Side IP Address</h3>
         <p>
@@ -97,13 +112,12 @@
         <hr>
 
         <p>Service: <a href="services/employee/getEmployeeDetails">Get Employee Details</a></p>
+    </div>
 
-        <hr>
-
-        <div class="footer">
-            <p>KK FUNDA Training, Development Center.</p>
-            <p><small>Copyrights 2024 by <a href="https://www.google.com/">KK FUNDA</a></small></p>
-        </div>
+    <!-- 🔷 Bottom Section with background -->
+    <div class="footer">
+        <p>KK FUNDA Training, Development Center.</p>
+        <p><small>Copyrights 2024 by <a href="https://www.google.com/">KK FUNDA</a></small></p>
     </div>
 
 </body>
