@@ -6,6 +6,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>KK FUNDA Home Page</title>
     <link href="images/kkfunda.jpg" rel="icon">
+<style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+    h1, h2, h3 { color: #2c3e50; }
+    a { color: #007BFF; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+</style>
+
 </head>
 <body>
     <h1 align="center">Welcome to KK DevOps AWS with SRE</h1>
