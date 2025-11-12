@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to KK Funda Devops AWS+SRE/h1>
+<h1 align="center">Welcome to KK Funda Devops with SRE starts on 11th Nov/h1>
 <h1 align="center"> KK FUNDA</h1>
 <hr>
 <br>
