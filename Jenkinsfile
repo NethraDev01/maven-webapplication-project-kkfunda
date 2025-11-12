@@ -11,7 +11,7 @@ node {
 
         stage('Git Checkout') {
             notifyBuild('STARTED')
-            git branch: 'Jenkins_practice', url: 'https://github.com/NethraDev01/maven-webapplication-project-kkfunda.git'
+            git branch: 'development', url: 'https://github.com/NethraDev01/maven-webapplication-project-kkfunda.git'
         }
 
         stage('Compile') {
