@@ -42,7 +42,7 @@ node
     {
       
       sh """
-curl -u kfunda:pssword \
+curl -u kkfunda:password \
 --upload-file /var/lib/jenkins/workspace/Jio-scripted-way-PL1/target/maven-web-application.war \
 "http://3.108.252.119:8080//manager/text/deploy?path=/maven-web-application&update=true"
 """
