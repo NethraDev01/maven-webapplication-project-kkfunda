@@ -1,91 +1,73 @@
-node
-{
+node {
 
-   echo "git branch name: ${env.BRANCH_NAME}"
-   echo "build number is: ${env.BUILD_NUMBER}"
-   echo "node name is: ${env.NODE_NAME}"
+    echo "git branch name: ${env.BRANCH_NAME}"
+    echo "build number is: ${env.BUILD_NUMBER}"
+    echo "node name is: ${env.NODE_NAME}"
+
+    // get maven tool path
+    def mavenHome = tool name: 'maven_3.9.3'
+
+    try {
+
+        stage('Git Checkout') {
+            notifyBuild('STARTED')
+            git branch: 'Jenkins_practice', url: 'https://github.com/NethraDev01/maven-webapplication-project-kkfunda.git'
+        }
+
+        stage('Compile') {
+            sh "${mavenHome}/bin/mvn clean compile"
+        }
+
+        stage('Build') {
+            sh "${mavenHome}/bin/mvn clean package"
+        }
+
+        stage('SonarQube Analysis') {
+            withSonarQubeEnv('SonarQube') {
+                sh "${mavenHome}/bin/mvn sonar:sonar -DskipTests"
+            }
+        }
+
+        stage('Upload Artifact') {
+            sh "${mavenHome}/bin/mvn deploy"
+        }
+
+        stage('Deploy to Tomcat') {
+            sh """
+                curl -u kkfunda:password \
+                --upload-file target/maven-web-application.war \
+                "http://3.108.252.119:8080/manager/text/deploy?path=/maven-web-application&update=true"
+            """
+        }
+
+        currentBuild.result = "SUCCESS"
+
+    } catch (e) {
+        currentBuild.result = "FAILURE"
+        echo "Pipeline failed: ${e}"
+        throw e
+
+    } finally {
+        notifyBuild(currentBuild.result)
+    }
+}
 
 
-   // /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven_3.9.3/bin
-   def mavenHome=tool name: 'maven_3.9.3'
-    try
-    {
+// ========== SLACK NOTIFICATION FUNCTION ==========
+def notifyBuild(String buildStatus = 'STARTED') {
 
-  stage('git checkout')
-  {
-    notifyBuild('STARTED')
-    git branch: 'Jenkins_practice', url: 'https://github.com/NethraDev01/maven-webapplication-project-kkfunda.git'
-  } 
+    echo "Calling notifyBuild with status: ${buildStatus}"
+    buildStatus = buildStatus ?: 'SUCCESS'
 
-    stage('COMPILE')
-  {
-    sh "${mavenHome}/bin/mvn clean compile"
-  }
+    def colorCode = '#FF0000'  // default red
 
-  stage('Build')
-  {
-    sh "${mavenHome}/bin/mvn clean package"
-  }
-
-    stage('SQ Report')
-  {
-    sh "${mavenHome}/bin/mvn sonar:sonar"
-  }
-
-      stage('Upload Artifact')
-  {
-
-    sh "${mavenHome}/bin/mvn clean deploy"
-  }
-
-    stage('Deploy to Tomcat') 
-    {
-      
-      sh """
-curl -u kkfunda:password \
---upload-file /var/lib/jenkins/workspace/Jio-scripted-way-PL1/target/maven-web-application.war \
-"http://3.108.252.119:8080//manager/text/deploy?path=/maven-web-application&update=true"
-"""
+    if (buildStatus == 'STARTED') {
+        colorCode = '#FFFF00' // yellow
+    } else if (buildStatus == 'SUCCESS') {
+        colorCode = '#00FF00' // green
     }
 
-    }  //try ending
+    def summary = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
 
-    catch (e) {
-   
-       currentBuild.result = "FAILED"
-
-  } finally {
-    // Success or failure, always send notifications
-    notifyBuild(currentBuild.result)
-  }
-  
-} // node ending
-
-
-def notifyBuild(String buildStatus = 'STARTED') {
-  // build status of null means successful
-  echo "Calling notifyBuild with status: ${buildStatus}"
-  buildStatus =  buildStatus ?: 'SUCCESS'
-
-  // Default values
-  def color = 'RED'
-  def colorCode = '#FF0000'
-  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-  def summary = "${subject} (${env.BUILD_URL})"
-
-  // Override default values based on build status
-  if (buildStatus == 'STARTED') {
-    color = 'YELLOW'
-    colorCode = '#FFFF00'
-  } else if (buildStatus == 'SUCCESS') {
-    color = 'GREEN'
-    colorCode = '#00FF00'
-  } else {
-    color = 'RED'
-    colorCode = '#FF0000'
-  }
-
-  // Send notifications
- slackSend (color: colorCode, message: summary, channel: '#dev_project')
-
-  }
+    slackSend(color: colorCode, message: summary, channel: '#dev_project')
+}
