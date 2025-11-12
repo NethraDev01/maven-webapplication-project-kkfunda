@@ -6,8 +6,8 @@ node
    echo "node name is: ${env.NODE_NAME}"
 
 
-   // /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.9.9/bin
-   def mavenHome=tool name: 'Maven-3.9.9'
+   // /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven_3.9.3/bin
+   def mavenHome=tool name: 'maven_3.9.3'
     try
     {
 
@@ -42,9 +42,9 @@ node
     {
       
       sh """
-curl -u admin:Jenkin@123 \
+curl -u kfunda:pssword \
 --upload-file /var/lib/jenkins/workspace/Jio-scripted-way-PL1/target/maven-web-application.war \
-"http://13.235.27.197:9090//manager/text/deploy?path=/maven-web-application&update=true"
+"http://3.108.252.119:8080//manager/text/deploy?path=/maven-web-application&update=true"
 """
     }
 
